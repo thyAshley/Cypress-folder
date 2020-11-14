@@ -11,13 +11,13 @@ describe('Test Contact Us Page', () => {
     cy.get('[name="email"]').type('joebiden@gmail.com');
     cy.get('[name="message"]').type('this is a message');
     cy.get('[type="submit"]').click();
-    cy.contains(/thank you/i);
+    cy.get('#contact_reply').children('h1').should('have.text', 'Thank You for your Message!')
   })
 
-  it.only('should not be able to submit form successfully if form not filled in', () => {
-    cy.get('[name="first_name"]').type('Tom');
-    cy.get('[name="last_name"]').type('biden');
-    cy.get('[name="message"]').type('This is wrong');
-    cy.get('[type="submit"]').click();
-  })
+  // it.only('should not be able to submit form successfully if form not filled in', () => {
+  //   cy.get('[name="first_name"]').type('Tom');
+  //   cy.get('[name="last_name"]').type('biden');
+  //   cy.get('[name="message"]').type('This is wrong');
+  //   cy.get('[type="submit"]').click();
+  // })
 })
