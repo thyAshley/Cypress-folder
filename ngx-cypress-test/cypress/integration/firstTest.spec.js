@@ -54,7 +54,7 @@ describe("First test suite", () => {
     cy.contains("nb-card", /horizontal form/i).find('[type="email"]');
   });
 
-  it.only("then and wrap method", () => {
+  it("then and wrap method", () => {
     cy.visit("/");
     cy.get(".menu-title").contains(/forms/i).click();
     cy.get(".menu-title")
@@ -78,5 +78,31 @@ describe("First test suite", () => {
         .find('[for="exampleInputEmail1"]')
         .should("contain", "Email");
     });
+  });
+  it.only("invoke command", () => {
+    cy.visit("/");
+    cy.get(".menu-title").contains(/forms/i).click();
+    cy.get(".menu-title")
+      .contains(/form layout/i)
+      .click();
+
+    cy.get('[for="exampleInputEmail1"]').should("contain", "Email");
+
+    cy.get('[for="exampleInputEmail1"]').then((label) => {
+      expect(label.text()).to.contain("Email");
+    });
+
+    cy.get('[for="exampleInputEmail1"]')
+      .invoke("text")
+      .then((text) => {
+        expect(text).to.contain("Email");
+      });
+
+    cy.contains("nb-card", "Basic form")
+      .find("nb-checkbox")
+      .click()
+      .find(".custom-checkbox")
+      .invoke("attr", "class")
+      .then((value) => expect(value).to.contain("checked"));
   });
 });

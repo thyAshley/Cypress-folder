@@ -3,7 +3,7 @@
 describe('Test contact on Automation store ', () => {
   beforeEach(() => {
     cy.visit('https://automationteststore.com/');
-    cy.get('[href$="/contact"]').click()
+    cy.get('[href$="/contact"]').click().then(item => console.log(item.text()))
   })
   it('test happy path for contact us', () => {
     cy.get('#ContactUsFrm_first_name').type('Joe');
@@ -14,6 +14,7 @@ describe('Test contact on Automation store ', () => {
     cy.get('.mb40 > :nth-child(3)').should('have.text', 'Your enquiry has been successfully sent to the store owner!')
     cy.contains(/continue/i).click();
     cy.url().should('equal', 'https://automationteststore.com/')
+    cy.log('Test has completed')
     
   })
 
