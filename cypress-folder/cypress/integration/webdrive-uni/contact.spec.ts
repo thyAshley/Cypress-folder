@@ -3,7 +3,7 @@
 describe('Test Contact Us Page', () => {
   beforeEach(() => {
     cy.visit('http://webdriveruniversity.com/index.html');
-    cy.get('#contact-us').invoke('attr','target','_self').click();
+    cy.get('#contact-us').invoke('removeAttr','target').click();
   })
   it.only('should be able to submit a correctly filled up form', () => {
     cy.document().should('have.property', 'charset').and('equal', 'UTF-8')
