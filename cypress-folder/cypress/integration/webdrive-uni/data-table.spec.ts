@@ -26,4 +26,11 @@ describe("Traversing Dom Element", () => {
         expect(totalAge).to.eq(322);
       });
   });
+  it.only("Check age base on user name", () => {
+    cy.get("#thumbnail-1 tr td:nth-child(2)").each((element, idx) => {
+      if (element.text() === "Woods") {
+        expect(element.next().text()).to.eq("80");
+      }
+    });
+  });
 });
