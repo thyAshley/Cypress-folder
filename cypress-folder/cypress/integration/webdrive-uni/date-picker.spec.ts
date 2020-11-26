@@ -1,9 +1,5 @@
 /// <reference types="Cypress" />
 
-/// <reference types="Cypress" />
-
-import { wrap } from "cypress/types/lodash";
-
 describe("Working with Date Picker", () => {
   beforeEach(() => {
     cy.visit("http://webdriveruniversity.com/index.html");
