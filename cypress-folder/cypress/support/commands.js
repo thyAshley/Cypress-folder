@@ -34,3 +34,18 @@ Cypress.Commands.add("selectProduct", (productName) => {
     }
   });
 });
+
+Cypress.Commands.add("fillForm", (data) => {
+  cy.get('[name="first_name"]').type(data.firstName);
+  cy.get('[name="last_name"]').type(data.lastName);
+  cy.get('[name="email"]').type(data.email);
+  cy.get('[name="message"]').type(data.body);
+});
+
+Cypress.Commands.add("addProductToBasket", (productName) => {
+  cy.get(".fixed_wrapper .prdocutname").each(($el, idx) => {
+    if ($el.text() === productName) {
+      cy.get(".productcart").eq(idx).click();
+    }
+  });
+});

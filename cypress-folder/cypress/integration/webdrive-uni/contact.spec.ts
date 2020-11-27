@@ -10,10 +10,7 @@ describe("Test Contact Us Page", () => {
     cy.document().should("have.property", "charset").and("equal", "UTF-8");
     cy.title().should("contains", "WebDriver");
     cy.fixture("example").then((data) => {
-      cy.get('[name="first_name"]').type(data.firstName);
-      cy.get('[name="last_name"]').type(data.lastName);
-      cy.get('[name="email"]').type(data.email);
-      cy.get('[name="message"]').type(data.body);
+      cy.fillForm(data);
     });
     cy.get('[type="submit"]').click();
     cy.get("#contact_reply")
