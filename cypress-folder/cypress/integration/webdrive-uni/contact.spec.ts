@@ -1,26 +1,31 @@
 /// <reference types="cypress">
 
-describe('Test Contact Us Page', () => {
+describe("Test Contact Us Page", () => {
   beforeEach(() => {
-    cy.visit('http://webdriveruniversity.com/index.html');
-    cy.get('#contact-us').invoke('removeAttr','target').click();
-  })
-  it.only('should be able to submit a correctly filled up form', () => {
-    cy.document().should('have.property', 'charset').and('equal', 'UTF-8')
-    cy.title().should('contains', 'WebDriver')
-    cy.get('[name="first_name"]').type('Joe')
-    cy.get('[name="last_name"]').type('biden');
-    cy.get('[name="email"]').type('joebiden@gmail.com');
-    cy.get('[name="message"]').type('this is a message');
-    cy.get('[type="submit"]').click();
-    cy.get('#contact_reply').children('h1').should('have.text', 'Thank You for your Message!')
-  })
+    cy.visit("http://webdriveruniversity.com/index.html");
+    cy.get("#contact-us").invoke("removeAttr", "target").click();
+  });
 
-  it('should not be able to submit form successfully if form not filled in', () => {
-    cy.get('[name="first_name"]').type('Tom');
-    cy.get('[name="last_name"]').type('biden');
-    cy.get('[name="message"]').type('This is wrong');
+  it.only("should be able to submit a correctly filled up form", () => {
+    cy.document().should("have.property", "charset").and("equal", "UTF-8");
+    cy.title().should("contains", "WebDriver");
+    cy.fixture("example").then((data) => {
+      cy.get('[name="first_name"]').type(data.firstName);
+      cy.get('[name="last_name"]').type(data.lastName);
+      cy.get('[name="email"]').type(data.email);
+      cy.get('[name="message"]').type(data.body);
+    });
     cy.get('[type="submit"]').click();
-    cy.get('body').contains('Error')
-  })
-})
+    cy.get("#contact_reply")
+      .children("h1")
+      .should("have.text", "Thank You for your Message!");
+  });
+
+  it("should not be able to submit form successfully if form not filled in", () => {
+    cy.get('[name="first_name"]').type("Tom");
+    cy.get('[name="last_name"]').type("biden");
+    cy.get('[name="message"]').type("This is wrong");
+    cy.get('[type="submit"]').click();
+    cy.get("body").contains("Error");
+  });
+});

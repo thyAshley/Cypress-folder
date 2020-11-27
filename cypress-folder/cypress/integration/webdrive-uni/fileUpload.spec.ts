@@ -16,4 +16,7 @@ describe("Working with File Upload", () => {
     });
     cy.get("#submit-button").click();
   });
+  it("upload no file", () => {
+    cy.get("#submit-button").click();
+  });
 });

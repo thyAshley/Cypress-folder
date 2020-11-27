@@ -25,3 +25,12 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import "cypress-file-upload";
+
+Cypress.Commands.add("selectProduct", (productName) => {
+  const product = new RegExp(`${productName}`, "i");
+  return cy.get(".fixed_wrapper .prdocutname").each(($el, idx) => {
+    if ($el.text().search(product) !== -1) {
+      cy.wrap($el).click();
+    }
+  });
+});
