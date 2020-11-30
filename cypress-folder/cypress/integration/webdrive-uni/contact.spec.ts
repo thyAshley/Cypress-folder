@@ -1,9 +1,13 @@
 /// <reference types="cypress">
 
+import Homepage_PO from "../../support/pageObjects/webdriver-uni/Homepage_PO";
+
 describe("Test Contact Us Page", () => {
   beforeEach(() => {
-    cy.visit("http://webdriveruniversity.com/index.html");
-    cy.get("#contact-us").invoke("removeAttr", "target").click();
+    // cy.visit("http://webdriveruniversity.com/index.html");
+    const homepage = new Homepage_PO();
+    homepage.visitHomepage();
+    homepage.clickOn_ContactUs();
   });
 
   it.only("should be able to submit a correctly filled up form", () => {
